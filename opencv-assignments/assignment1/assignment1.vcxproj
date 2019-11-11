@@ -127,9 +127,15 @@
     <Image Include="..\..\lenna.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="affine.cpp" />
+    <ClCompile Include="bilinier.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="nearest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bilinier.h" />
+    <ClInclude Include="affine.h" />
+    <ClInclude Include="nearest.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

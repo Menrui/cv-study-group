@@ -2,8 +2,6 @@
 
 #include<iostream>
 #include<string>
-#include<tuple>
 #include<opencv2\opencv.hpp>
-#include "bilinier.h"
-#include "nearest.h"
-#include "affine.h"
+
+cv::Vec3b bilinier(cv::Mat image, double x, double y);
