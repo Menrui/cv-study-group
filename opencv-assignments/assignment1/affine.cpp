@@ -14,12 +14,7 @@ tuple<double, double> pixelAffine(Mat A, int x, int y)
 
 Mat imageAffine(double A[3][3], Mat image, string mode) {
 	
-	Mat A_mat = Mat_<double>::zeros(3, 3);
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			A_mat.at<double>(i, j) = A[i][j];
-		}
-	}
+	Mat A_mat(3, 3, CV_64FC1, A);
 
 	Mat affined = image.clone();
 	int cols = affined.cols;
@@ -37,12 +32,8 @@ Mat imageAffine(double A[3][3], Mat image, string mode) {
 			tuple<double, double> pixel = pixelAffine(A_mat, i, j);
 			double x = get<0>(pixel);
 			double y = get<1>(pixel);
-			//if(x<=cols && y<=rows){
-				affined.at<cv::Vec3b>(j, i) = bilinier(image, x, y);
-			//}
-			//else {
-			//	affined.at<cv::Vec3b>(j, i) = 255; 
-			//}
+			affined.at<cv::Vec3b>(j, i) = nearest(image, x, y);
+			//affined.at<cv::Vec3b>(j, i) = bilinier(image, x, y);
 		}
 	}
 

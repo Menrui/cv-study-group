@@ -23,9 +23,6 @@ int main() {
 		"other"
 		) << endl;
 
-	Vec3b i = nearest(image, 1.1, 1.1);
-	i = bilinier(image, 1.1, 1.1);
-
 	double A[3][3] = { {1, 0, 100}, {0, 1, 50}, { 0, 0, 1} };
 
 	image = imageAffine(A, image, "");
