@@ -6,5 +6,6 @@
 #include "bilinier.h"
 #include "nearest.h"
 
+enum class ComplementMode { bilinier, nearest };
 std::tuple<double, double> pixelAffine(cv::Mat A, int x, int y);
-cv::Mat imageAffine(double A[3][3], cv::Mat image, std::string mode);
+cv::Mat imageAffine(double A[3][3], cv::Mat image, ComplementMode mode);

@@ -2,6 +2,7 @@
 using namespace std;
 using namespace cv;
 
+
 tuple<double, double> pixelAffine(Mat A, int x, int y)
 {
 	Mat affine_pixel = (Mat_<double>(3, 1) << x, y, 1);
@@ -12,7 +13,7 @@ tuple<double, double> pixelAffine(Mat A, int x, int y)
 	return forward_as_tuple(ori_pixel.at<double>(0, 0), ori_pixel.at<double>(1, 0));
 }
 
-Mat imageAffine(double A[3][3], Mat image, string mode) {
+Mat imageAffine(double A[3][3], Mat image, ComplementMode mode) {
 	
 	Mat A_mat(3, 3, CV_64FC1, A);
 
@@ -32,8 +33,14 @@ Mat imageAffine(double A[3][3], Mat image, string mode) {
 			tuple<double, double> pixel = pixelAffine(A_mat, i, j);
 			double x = get<0>(pixel);
 			double y = get<1>(pixel);
-			affined.at<cv::Vec3b>(j, i) = nearest(image, x, y);
-			//affined.at<cv::Vec3b>(j, i) = bilinier(image, x, y);
+			switch (mode) 
+			{
+				case ComplementMode::bilinier	:
+					affined.at<cv::Vec3b>(j, i) = bilinier(image, x, y);
+				case ComplementMode::nearest	:
+					affined.at<cv::Vec3b>(j, i) = nearest(image, x, y);
+			}
+			
 		}
 	}
 

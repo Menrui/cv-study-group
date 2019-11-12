@@ -25,7 +25,7 @@ int main() {
 
 	double A[3][3] = { {1, 0, 100}, {0, 1, 50}, { 0, 0, 1} };
 
-	image = imageAffine(A, image, "");
+	image = imageAffine(A, image, ComplementMode::bilinier);
 
 	imshow("imshow test", image);
 	waitKey();
