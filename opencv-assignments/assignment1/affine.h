@@ -8,4 +8,5 @@
 
 enum class ComplementMode { bilinier, nearest };
 std::tuple<double, double> pixelAffine(cv::Mat A, int x, int y);
-cv::Mat imageAffine(double A[3][3], cv::Mat image, ComplementMode mode);
+std::tuple<double, double> pixelAffine2(cv::Mat A, int x, int y);
+cv::Mat imageAffine(cv::Matx33d A, cv::Mat image, ComplementMode mode);
