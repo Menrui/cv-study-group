@@ -53,14 +53,15 @@ Mat imageAffine(Matx33d A, Mat image, ComplementMode mode) {
 			switch (mode) 
 			{
 				case ComplementMode::bilinier	:
-					affined.at<cv::Vec3b>(j, i) = bilinier(image, x, y);
+					affined.at<cv::Vec3b>(j, i) = bilinier(image, x, y);;
+					break;
 				case ComplementMode::nearest	:
 					affined.at<cv::Vec3b>(j, i) = nearest(image, x, y);
+					break;
 			}
 			
 		}
 	}
-
 
 	return affined;
 }

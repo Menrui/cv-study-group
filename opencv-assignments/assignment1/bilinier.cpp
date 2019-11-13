@@ -12,10 +12,11 @@ Vec3b bilinier(cv::Mat image, double x, double y)
 		value = Vec3b(0, 0, 0);
 	}
 	else {
-		value = ((gauss_x + 1.0 - x) * (gauss_y + 1.0 - y) * image.at<Vec3b>(gauss_y, gauss_x) +
-			(gauss_x + 1.0 - x) * (y - gauss_y) * image.at<Vec3b>(gauss_y + 1, gauss_x) +
-			(x - gauss_x) * (gauss_y + 1.0 - y) * image.at<Vec3b>(gauss_y, gauss_x + 1) +
-			(x - gauss_x) * (y - gauss_y) * image.at<Vec3b>(gauss_y + 1, gauss_x + 1));
+		value = 
+			(gauss_x + 1.0 - x) * (gauss_y + 1.0 - y) * image.at <Vec3b>(Point(gauss_x, gauss_y)) +
+			(gauss_x + 1.0 - x) * (y - gauss_y) * image.at <Vec3b>(Point(gauss_x, gauss_y + 1)) +
+			(x - gauss_x) * (gauss_y + 1.0 - y) * image.at <Vec3b>(Point(gauss_x + 1, gauss_y)) +
+			(x - gauss_x) * (y - gauss_y) * image.at <Vec3b>(Point(gauss_x + 1, gauss_y + 1));
 	}
 
 	return value;

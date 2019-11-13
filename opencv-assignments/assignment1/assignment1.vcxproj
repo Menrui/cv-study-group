@@ -125,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Image Include="..\..\lenna.png" />
+    <Image Include="..\..\test.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="affine.cpp" />

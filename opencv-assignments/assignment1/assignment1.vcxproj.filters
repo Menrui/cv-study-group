@@ -18,6 +18,9 @@
     <Image Include="..\..\lenna.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="..\..\test.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
