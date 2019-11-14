@@ -4,7 +4,7 @@ using namespace cv;
 using namespace std;
 
 int main() {
-	Mat image = imread("..\\..\\lenna.png");
+	Mat image = imread("..\\image\\lenna.png");
 	if (image.empty()) return -1;
 
 	cout << "type: " << (

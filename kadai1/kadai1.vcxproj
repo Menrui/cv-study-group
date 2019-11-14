@@ -125,10 +125,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Image Include="..\..\lenna.png" />
-    <Image Include="..\..\test.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="affine.cpp" />
     <ClCompile Include="bilinier.cpp" />
     <ClCompile Include="main.cpp" />
@@ -139,6 +135,10 @@
     <ClInclude Include="affine.h" />
     <ClInclude Include="nearest.h" />
     <ClInclude Include="main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\image\lenna.png" />
+    <Image Include="..\image\test.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

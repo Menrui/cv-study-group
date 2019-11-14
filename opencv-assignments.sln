@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "kadai1", "kadai1\kadai1.vcxproj", "{7F444C6C-AF1A-44C1-B8E6-D0203ECBA226}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "kadai2", "kadai2\kadai2.vcxproj", "{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{7F444C6C-AF1A-44C1-B8E6-D0203ECBA226}.Release|x64.Build.0 = Release|x64
 		{7F444C6C-AF1A-44C1-B8E6-D0203ECBA226}.Release|x86.ActiveCfg = Release|Win32
 		{7F444C6C-AF1A-44C1-B8E6-D0203ECBA226}.Release|x86.Build.0 = Release|Win32
+		{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}.Debug|x64.ActiveCfg = Debug|x64
+		{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}.Debug|x64.Build.0 = Debug|x64
+		{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}.Debug|x86.ActiveCfg = Debug|Win32
+		{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}.Debug|x86.Build.0 = Debug|Win32
+		{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}.Release|x64.ActiveCfg = Release|x64
+		{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}.Release|x64.Build.0 = Release|x64
+		{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}.Release|x86.ActiveCfg = Release|Win32
+		{E0ECCB3E-5BD8-4AED-9F3E-87C3B4C1E9FD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
