@@ -21,6 +21,15 @@
     <Image Include="..\image\test.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="..\image\DSC_0438.JPG">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="..\image\background.jpg">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="..\image\object.jpg">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -41,6 +50,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="binarization.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="difference.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="objectDetection.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

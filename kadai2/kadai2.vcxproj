@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\image\background.jpg" />
+    <Image Include="..\image\DSC_0438.JPG" />
     <Image Include="..\image\lenna.png" />
+    <Image Include="..\image\object.jpg" />
     <Image Include="..\image\test.png" />
   </ItemGroup>
   <ItemGroup>
@@ -30,7 +33,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="binarization.cpp" />
+    <ClCompile Include="difference.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="objectDetection.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
