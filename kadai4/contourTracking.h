@@ -5,5 +5,4 @@
 #include<tuple>
 #include<opencv2\opencv.hpp>
 
-#include "33filtering.h"
-#include "morphology.h"
+cv::Mat contourTracking(cv::Mat image);

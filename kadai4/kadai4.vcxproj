@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{EBA33F6A-EF0B-411E-A7E5-9EAF1DB517FC}</ProjectGuid>
-    <RootNamespace>kadai3</RootNamespace>
+    <ProjectGuid>{AC4BB36D-76E2-49A2-836F-857FB681289B}</ProjectGuid>
+    <RootNamespace>kadai4</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -124,18 +124,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Image Include="..\image\e.png" />
-    <Image Include="..\image\lenna.png" />
+    <Image Include="..\image\data.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="33filtering.h" />
-    <ClInclude Include="morphology.h" />
+    <ClInclude Include="contourTracking.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="33filtering.cpp" />
+    <ClCompile Include="contourTracking.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="morphology.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
