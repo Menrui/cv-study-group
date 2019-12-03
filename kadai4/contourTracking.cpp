@@ -11,15 +11,92 @@ cv::Mat contourTracking(cv::Mat image)
 	unsigned char value = 255;
 	copyMakeBorder(image, image, 1, 1, 1, 1, BORDER_CONSTANT, Scalar(255));
 	Mat mapping = Mat(rows, cols, CV_8UC1);
+	mapping = 255;
+
+	int old_dir = 0, new_dir = 0;
 
 	//raster scan
 	for (int y = 0; y < rows; y++) {
 		for (int x = 0; x < cols; x++) {
 			value = image.at<unsigned char>(Point(x, y));
 
-			if (x != 0 && pre_value == 255 && value == 0) {
-				mapping.at<unsigned char>(Point(x, y)) = 0;
-				clockwiseSearch(image, mapping, x, y, enterDirection::from_left);
+			if (x != 0 && pre_value == 255 && value == 0 ) {
+				cout << "start : " << x << ", " << y << endl;
+				//mapping.at<unsigned char>(Point(x, y)) = 0;
+				int x_ = x, y_ = y;
+				bool check = true;
+
+				while (check) {
+					Point search = Point(x_, y_);
+					if (mapping.at<unsigned char>(search) == 0) {
+						check = false;
+					}
+					switch (new_dir)
+					{
+					case 0:
+						search = Point(x_ - 1, y - 1);
+						if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
+							mapping.at<unsigned char>(search) = 0;
+							x_--; y_--;
+							break;
+						}
+					case 1:
+						search = Point(x_, y_ - 1);
+						if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
+							mapping.at<unsigned char>(search) = 0;
+							y_--;
+							break;
+						}
+					case 2:
+						search = Point(x_ + 1, y_ - 1);
+						if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
+							mapping.at<unsigned char>(search) = 0;
+							x_++; y_--;
+							break;
+						}
+					case 3:
+						search = Point(x_ + 1, y_);
+						if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
+							mapping.at<unsigned char>(search) = 0;
+							x_++;
+							break;
+						}
+					case 4:
+						search = Point(x_ + 1, y_ + 1);
+						if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
+							mapping.at<unsigned char>(search) = 0;
+							x_++; y_++;
+							break;
+						}
+					case 5:
+						search = Point(x_, y_ + 1);
+						if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
+							mapping.at<unsigned char>(search) = 0;
+							y_++;
+							break;
+						}
+					case 6:
+						search = Point(x_ - 1, y_ + 1);
+						if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
+							mapping.at<unsigned char>(search) = 0;
+							x_--; y_++;
+							break;
+						}
+					case 7:
+						search = Point(x_ - 1, y_);
+						if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
+							mapping.at<unsigned char>(search) = 0;
+							x_--;
+							break;
+						}
+					default:
+						check = false;
+					}
+					old_dir = new_dir;
+					new_dir = (old_dir + 6) % 8;
+				};
+
+				//clockwiseSearch(image, mapping, x, y, enterDirection::from_left);
 			}
 
 			pre_value = value;
@@ -31,6 +108,8 @@ cv::Mat contourTracking(cv::Mat image)
 
 
 
+
+/*
 pixelDirection clockwiseSearch(cv::Mat image, cv::Mat map, int x, int y, enterDirection mode)
 {
 	Direction begin; //íTçıäJénï˚å¸
@@ -53,7 +132,7 @@ pixelDirection clockwiseSearch(cv::Mat image, cv::Mat map, int x, int y, enterDi
 		break;
 	}
 
-	pixelDirection result = clockwise(image, x_, y_, begin);
+	pixelDirection result = clockwise(image, x, y, begin);
 	enterDirection next_mode;
 	switch (result)
 	{
@@ -93,6 +172,9 @@ pixelDirection clockwiseSearch(cv::Mat image, cv::Mat map, int x, int y, enterDi
 		y_--;
 		next_mode = enterDirection::from_right;
 		break;
+	case pixelDirection::none:
+		map.at<unsigned char>(Point(x_, y_)) = 255;
+		return pixelDirection();
 	}
 
 	if (map.at<unsigned char>(Point(x_, y_)) == 0)
@@ -113,44 +195,45 @@ pixelDirection clockwise(Mat image, int x, int y, Direction begin) {
 	case Direction::left:
 		m = -1;
 		n = 0;
-		if (image.at<unsigned char>(Point(x + m, y + n)) == 255)
+		if (image.at<unsigned char>(Point(x + m, y + n)) == 0)
 			return pixelDirection::left;
 	case Direction::top_left:
 		m = -1;
 		n = 1;
-		if (image.at<unsigned char>(Point(x + m, y + n)) == 255)
+		if (image.at<unsigned char>(Point(x + m, y + n)) == 0)
 			return pixelDirection::top_left;
 	case Direction::top:
 		m = 0;
 		n = 1;
-		if (image.at<unsigned char>(Point(x + m, y + n)) == 255)
+		if (image.at<unsigned char>(Point(x + m, y + n)) == 0)
 			return pixelDirection::top;
 	case Direction::top_right:
 		m = 1;
 		n = 1;
-		if (image.at<unsigned char>(Point(x + m, y + n)) == 255)
+		if (image.at<unsigned char>(Point(x + m, y + n)) == 0)
 			return pixelDirection::top_right;
 	case Direction::right:
 		m = 1;
 		n = 0;
-		if (image.at<unsigned char>(Point(x + m, y + n)) == 255)
+		if (image.at<unsigned char>(Point(x + m, y + n)) == 0)
 			return pixelDirection::right;
 	case Direction::bottom_right:
 		m = 1;
 		n = -1;
-		if (image.at<unsigned char>(Point(x + m, y + n)) == 255)
+		if (image.at<unsigned char>(Point(x + m, y + n)) == 0)
 			return pixelDirection::bottom_right;
 	case Direction::bottom:
 		m = 0;
 		n = -1;
-		if (image.at<unsigned char>(Point(x + m, y + n)) == 255)
+		if (image.at<unsigned char>(Point(x + m, y + n)) == 0)
 			return pixelDirection::bottom;
 	case Direction::bottom_left:
 		m = -1;
 		n = -1;
-		if (image.at<unsigned char>(Point(x + m, y + n)) == 255)
+		if (image.at<unsigned char>(Point(x + m, y + n)) == 0)
 			return pixelDirection::bottom_left;
 	default:
 	return pixelDirection::none;
 	}
 }
+*/

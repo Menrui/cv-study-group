@@ -5,7 +5,7 @@ int main() {
 	Mat image = imread("..\\image\\data.png", 0);
 	imshow("origin", image);
 	Mat mapping = contourTracking(image);
-	imshow("", mapping);
+	imshow("trace", mapping);
 	waitKey();
 
 	return -0;
