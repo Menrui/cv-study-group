@@ -18,6 +18,9 @@
     <Image Include="..\image\data.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="..\image\data_test.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -26,12 +29,18 @@
     <ClInclude Include="contourTracking.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="morphology.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="contourTracking.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="morphology.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

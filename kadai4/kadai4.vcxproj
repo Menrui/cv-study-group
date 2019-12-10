@@ -125,14 +125,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Image Include="..\image\data.png" />
+    <Image Include="..\image\data_test.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="contourTracking.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="morphology.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="contourTracking.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="morphology.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
