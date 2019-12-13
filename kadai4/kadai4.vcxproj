@@ -126,6 +126,7 @@
   <ItemGroup>
     <Image Include="..\image\data.png" />
     <Image Include="..\image\data_test.png" />
+    <Image Include="trace.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="contourTracking.h" />

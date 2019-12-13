@@ -14,169 +14,43 @@ cv::Mat contourTracking(cv::Mat image)
 	mapping = 255;
 
 	int old_dir = 0, new_dir = 0;
+	Point clockwise[8] = { Point(-1, -1), Point(0, -1), Point(1, -1), 
+							Point(1, 0), Point(1, 1), 
+							Point(0, 1), Point(-1, 1), 
+							Point(-1, 0) };
 
 	//raster scan
 	for (int y = 0; y < rows; y++) {
 		for (int x = 0; x < cols; x++) {
 			value = image.at<unsigned char>(Point(x, y));
 
-			if (x != 0 && (pre_value == 255 && value == 0)) {
+			if (x != 0 && (pre_value != 0 && value == 0)) {
 				//cout << "start : " << x << ", " << y << endl;
 				//mapping.at<unsigned char>(Point(x, y)) = 0;
-				int x_ = x, y_ = y;
 
-				Point search = Point(x_, y_);
-				int cnt = 0;
+				Point search = Point(x, y);
+				Point search_tmp = search + clockwise[0];
+				new_dir = 0;
+				old_dir = 0;
+
 				bool isThrough = false;
+				int i;
 				if (mapping.at<unsigned char>(search) == 0) continue;
 
-				while (true) {
-					if (new_dir == 0 || cnt != 0) {
-						search = Point(x_ - 1, y - 1);
-						if (mapping.at<unsigned char>(search) == 0) {
-							//if (isThrough) break;
-							break;
-							isThrough = true;
-						}
-						else if (cnt++ == 7) {
-							break;
-						}
-						else if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
-							mapping.at<unsigned char>(search) = 0;
-							x_--; y_--;
-							cnt = 0;
-							old_dir = 0;
-							new_dir = (old_dir + 6) % 8;
-						}
+				for (i = 0; i < 8; i++) {
+					search_tmp = search + clockwise[(i + new_dir) % 8];
+					if (mapping.at<unsigned char>(search_tmp) == 0) {
+						break;
 					}
-					if (new_dir == 1 || cnt != 0) {
-						search = Point(x_, y_ - 1);
-						if (mapping.at<unsigned char>(search) == 0) {
-							//if (isThrough) break;
-							break;
-							isThrough = true;
-						}
-						else if (cnt++ == 7) {
-							break;
-						}
-						else if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
-							mapping.at<unsigned char>(search) = 0;
-							y_--;
-							cnt = 0;
-							old_dir = 1;
-							new_dir = (old_dir + 6) % 8;
-						}
-					}
-					if (new_dir == 2 || cnt != 0) {
-						search = Point(x_ + 1, y_ - 1);
-						if (mapping.at<unsigned char>(search) == 0) {
-							//if (isThrough) break;
-							break;
-							isThrough = true;
-						}
-						else if (cnt++ == 7) {
-							break;
-						}
-						else if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
-							mapping.at<unsigned char>(search) = 0;
-							x_++; y_--;
-							cnt = 0;
-							old_dir = 2;
-							new_dir = (old_dir + 6) % 8;
-						}
-					}
-					if (new_dir == 3 || cnt != 0) {
-						search = Point(x_ + 1, y_);
-						if (mapping.at<unsigned char>(search) == 0) {
-							//if (isThrough) break;
-							break;
-							isThrough = true;
-						}
-						else if (cnt++ == 7) {
-							break;
-						}
-						else if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
-							mapping.at<unsigned char>(search) = 0;
-							x_++;
-							cnt = 0;
-							old_dir = 3;
-							new_dir = (old_dir + 6) % 8;
-						}
-					}
-					if (new_dir == 4 || cnt != 0) {
-						search = Point(x_ + 1, y_ + 1);
-						if (mapping.at<unsigned char>(search) == 0) {
-							//if (isThrough) break;
-							break;
-							isThrough = true;
-						}
-						else if (cnt++ == 7) {
-							break;
-						}
-						else if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
-							mapping.at<unsigned char>(search) = 0;
-							x_++; y_++;
-							cnt = 0;
-							old_dir = 4;
-							new_dir = (old_dir + 6) % 8;
-						}
-					}
-					if (new_dir == 5 || cnt != 0) {
-						search = Point(x_, y_ + 1);
-						if (mapping.at<unsigned char>(search) == 0) {
-							//if (isThrough) break;
-							break;
-							isThrough = true;
-						}
-						else if (cnt++ == 7) {
-							break;
-						}
-						else if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
-							mapping.at<unsigned char>(search) = 0;
-							y_++;
-							cnt = 0;
-							old_dir = 5;
-							new_dir = (old_dir + 6) % 8;
-						}
-					}
-					if (new_dir == 6 || cnt != 0) {
-						search = Point(x_ - 1, y_ + 1);
-						if (mapping.at<unsigned char>(search) == 0) {
-							//if (isThrough) break;
-							break;
-							isThrough = true;
-						}
-						else if (cnt++ == 7) {
-							break;
-						}
-						else if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
-							mapping.at<unsigned char>(search) = 0;
-							x_--; y_++;
-							cnt = 0;
-							old_dir = 6;
-							new_dir = (old_dir + 6) % 8;
-						}
-					}
-					if (new_dir == 7 || cnt != 0) {
-						search = Point(x_ - 1, y_);
-						if (mapping.at<unsigned char>(search) == 0) {
-							//if(isThrough) break;
-							break;
-							isThrough = true;
-						}
-						else if (cnt++ == 7) {
-							break;
-						}
-						else if (image.at<unsigned char>(search) == 0 && mapping.at<unsigned char>(search) != 0) {
-							mapping.at<unsigned char>(search) = 0;
-							x_--;
-							cnt = 0;
-							old_dir = 7;
-							new_dir = (old_dir + 6) % 8;
-						}
+					if (image.at<unsigned char>(search_tmp) == 0) {
+						if (search == Point(x, y) && mapping.at<unsigned char>(search_tmp) == 0) break;
+						mapping.at<unsigned char>(search_tmp) = 0;
+						search = search_tmp; // move
+						old_dir = (i + new_dir) % 8;
+						new_dir = (old_dir + 6) % 8;
+						i = 0;
 					}
 				}
-
 			}
 
 			pre_value = value;

@@ -21,6 +21,9 @@
     <Image Include="..\image\data_test.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="trace.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
