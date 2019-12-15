@@ -4,29 +4,31 @@ using namespace std;
 
 cv::Mat contourTracking(cv::Mat image)
 {
-	int rows = image.rows;
-	int cols = image.cols;
-	cout << rows << ", " << cols << endl;
+//	int rows = image.rows;
+//	int cols = image.cols;
+//	cout << rows << ", " << cols << endl;
 	unsigned char pre_value = 255;
 	unsigned char value = 255;
 	copyMakeBorder(image, image, 1, 1, 1, 1, BORDER_CONSTANT, Scalar(255));
+	int rows = image.rows;
+	int cols = image.cols;
+	cout << rows << ", " << cols << endl;
+	//imwrite("data2.png", image);
 	Mat mapping = Mat(rows, cols, CV_8UC1);
 	mapping = 255;
 
 	int old_dir = 0, new_dir = 0;
-	Point clockwise[8] = { Point(-1, -1), Point(0, -1), Point(1, -1), 
-							Point(1, 0), Point(1, 1), 
-							Point(0, 1), Point(-1, 1), 
+	Point clockwise[8] = { Point(-1, 1), Point(0, 1), Point(1, 1), 
+							Point(1, 0), Point(1, -1), 
+							Point(0, -1), Point(-1, -1), 
 							Point(-1, 0) };
 
 	//raster scan
 	for (int y = 0; y < rows; y++) {
 		for (int x = 0; x < cols; x++) {
+			pre_value = value;
 			value = image.at<unsigned char>(Point(x, y));
-
-			if (x != 0 && (pre_value != 0 && value == 0)) {
-				//cout << "start : " << x << ", " << y << endl;
-				//mapping.at<unsigned char>(Point(x, y)) = 0;
+			if (x != 0 && pre_value == 255 && value == 0) {
 
 				Point search = Point(x, y);
 				Point search_tmp = search + clockwise[0];
@@ -39,21 +41,16 @@ cv::Mat contourTracking(cv::Mat image)
 
 				for (i = 0; i < 8; i++) {
 					search_tmp = search + clockwise[(i + new_dir) % 8];
-					if (mapping.at<unsigned char>(search_tmp) == 0) {
-						break;
-					}
 					if (image.at<unsigned char>(search_tmp) == 0) {
 						if (search == Point(x, y) && mapping.at<unsigned char>(search_tmp) == 0) break;
 						mapping.at<unsigned char>(search_tmp) = 0;
 						search = search_tmp; // move
 						old_dir = (i + new_dir) % 8;
 						new_dir = (old_dir + 6) % 8;
-						i = 0;
+						i = -1;
 					}
 				}
 			}
-
-			pre_value = value;
 		}
 	}
 
