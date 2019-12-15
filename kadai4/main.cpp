@@ -11,6 +11,10 @@ int main() {
 	Mat mapping = contourTracking(image);
 	imshow("trace", mapping);
 	imwrite("trace.png", mapping);
+
+	Mat rabel = rabeling(image);
+	imshow("rabel", mapping);
+
 	waitKey();
 
 	return 0;

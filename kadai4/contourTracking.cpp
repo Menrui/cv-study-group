@@ -35,11 +35,9 @@ cv::Mat contourTracking(cv::Mat image)
 				new_dir = 0;
 				old_dir = 0;
 
-				bool isThrough = false;
-				int i;
 				if (mapping.at<unsigned char>(search) == 0) continue;
 
-				for (i = 0; i < 8; i++) {
+				for (int i = 0; i < 8; i++) {
 					search_tmp = search + clockwise[(i + new_dir) % 8];
 					if (image.at<unsigned char>(search_tmp) == 0) {
 						if (search == Point(x, y) && mapping.at<unsigned char>(search_tmp) == 0) break;

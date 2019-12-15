@@ -7,3 +7,4 @@
 
 #include "contourTracking.h"
 #include "morphology.h"
+#include "rabeling.h"
