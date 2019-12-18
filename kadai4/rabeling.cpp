@@ -71,12 +71,21 @@ cv::Mat rabeling(cv::Mat image)
 			}
 		}
 	}
+	cout << table.size() << endl;
 
+	int table_size = table.size();
+	int table_i_size = table[0].size();
 	for (int i = 0; i < table.size(); i++) {
 		for (int j = 0; j < table[i].size(); j++) {
-
+			//cout << table[i][j] << "," << table[table[i][j]].size() << endl;
+			if (table[table[i][j]].size() > 0) {
+				table[i].insert(table[i].begin(), table[table[i][j]].begin(), table[table[i][j]].end());
+			}
+			table_i_size = table[i].size();
 		}
+		table_size = table.size();
 	}
+	cout << table.size() << endl;
 
 	for (int y = 0; y < rows; y++) {
 		for (int x = 0; x < cols; x++) {
